@@ -1,4 +1,5 @@
 import pytest
+import yaml
 
 
 class Test_Case1:
@@ -20,8 +21,9 @@ class Test_Case2:
         print("这是参数化的用例")
         print(f"参数1={a},参数b={b}")
 
-    def test_2(self):
-        print("这是2")
+    @pytest.mark.parametrize(["a", "b"], yaml.safe_load(open("./data1.yaml")))
+    def test_2(self, a, b):
+        print("a+b=", a + b)
 
     def test3(self):
         print("这是3")
